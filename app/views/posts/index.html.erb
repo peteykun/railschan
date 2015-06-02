@@ -1,4 +1,6 @@
 <div class="title">
+  <%= image_tag "banner.png" %>
+
   <h1>/prate/ - Show Discussion</h1>
   <p>All things prate.</p>
 </div>
@@ -19,7 +21,7 @@
 
     <tr>
       <td class="label"><%= f.label :subject %></td>
-      <td><%= f.text_field :subject %></td>
+      <td><%= f.text_field :subject %> <%= f.submit "New Topic" %></td>
     </tr>
 
     <tr>
@@ -30,10 +32,6 @@
     <tr>
       <td class="label"><%= f.label :file %></td>
       <td><%= f.file_field :file %></td>
-    </tr>
-
-    <tr>
-      <td colspan="2"><%= f.submit "New Topic" %></td>
     </tr>
   </table>
   
@@ -72,13 +70,17 @@
         <a id="<%= reply.id %>">
         <div class="post reply">
           <div class="head">
-            <a href="#">[ - ]</a> File: <%= link_to reply.file_file_name, reply.file.url %> (<%= (reply.file.size / 1000.0).round(2) %> KB, <%= reply.width.to_i %>x<%= reply.height.to_i %>)
+            <a href="#">[ - ]</a> File: <% if reply.file.exists? %><%= link_to reply.file_file_name, reply.file.url %> (<%= (reply.file.size / 1000.0).round(2) %> KB, <%= reply.width.to_i %>x<%= reply.height.to_i %>)<% else %>no file attached<% end %>
           </div>
 
           <div class="body">
             <div class="image">
+              <% if reply.file.exists? %>
               <%= link_to reply.file.url do %>
                 <%= image_tag reply.file.url(:small) %>
+              <% end %>
+              <% else %>
+                <%= image_tag 'no_image.png' %>
               <% end %>
             </div>
 
@@ -110,3 +112,17 @@
 <hr>
 <br>
 <% end %>
+
+<br>
+
+<div class="swampert">
+  <%= image_tag "swampert.jpg" %>
+</div>
+
+<br>
+
+<footer>
+  &copy; 2015-16 Secretchan. All rights reserved.
+</footer>
+
+<br>

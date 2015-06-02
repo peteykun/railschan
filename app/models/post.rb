@@ -1,6 +1,5 @@
 class Post < ActiveRecord::Base
   has_attached_file :file, :styles => { :medium => "300x300>", :small => "150x150" }, :default_url => "/images/missing.png"
-  validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => /\Aimage\/.*\Z/
   validates_presence_of :name, :subject, :comment
 

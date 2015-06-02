@@ -46,6 +46,10 @@ class PostsController < ApplicationController
         error = "Invalid thread specified to reply to."
 
       end
+    else
+      if @new_post.file_file_name.nil?
+        error = "Image file required"
+      end
     end
 
     puts (error + ":") * 100
