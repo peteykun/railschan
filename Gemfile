@@ -43,3 +43,5 @@ group :development, :test do
   gem 'spring'
 end
 
+gem "paperclip", "~> 4.2"
+

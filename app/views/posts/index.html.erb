@@ -1,0 +1,112 @@
+<div class="title">
+  <h1>/prate/ - Show Discussion</h1>
+  <p>All things prate.</p>
+</div>
+
+<%= form_for(@new_post) do |f| %>
+
+  <% if flash[:notice] %>
+  <div class="notice">
+    <%= raw flash[:notice] %>
+  </div>
+  <% end %>
+
+  <table class="form">
+    <tr>
+      <td class="label"><%= f.label :name %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+
+    <tr>
+      <td class="label"><%= f.label :subject %></td>
+      <td><%= f.text_field :subject %></td>
+    </tr>
+
+    <tr>
+      <td class="label"><%= f.label :comment %></td>
+      <td><%= f.text_area :comment %></td>
+    </tr>
+
+    <tr>
+      <td class="label"><%= f.label :file %></td>
+      <td><%= f.file_field :file %></td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><%= f.submit "New Topic" %></td>
+    </tr>
+  </table>
+  
+<% end %>
+
+<br>
+<hr>
+
+<% @posts.each do |post| %>
+<!-- post goes here -->
+
+<a id="<%= post.id %>">
+<div class="post">
+  <div class="head">
+    <a href="#">[ - ]</a> File: <%= link_to post.file_file_name, post.file.url %> (<%= (post.file.size / 1000.0).round(2) %> KB, <%= post.width.to_i %>x<%= post.height.to_i %>)
+  </div>
+
+  <div class="body">
+    <div class="image">
+      <%= link_to post.file.url do %>
+        <%= image_tag post.file.url(:medium) %>
+      <% end %>
+    </div>
+
+    <div class="content">
+      <div class="content_heading">
+        <input type="checkbox">
+        <h2 class="subject"><%= post.subject %></h2> &mdash; <span class="name"><%= post.name %></span> <%= post.created_at.strftime("%-d %b %Y %H:%M:%S") %> <span class="no" data-id="<%= post.id %>">No. <%= post.id %></span>
+      </div>
+
+      <%= simple_format post.comment %>
+
+      <!-- replies go here -->
+      <% post.replies.order('id').each do |reply| %>
+        <!-- reply goes here -->
+        <a id="<%= reply.id %>">
+        <div class="post reply">
+          <div class="head">
+            <a href="#">[ - ]</a> File: <%= link_to reply.file_file_name, reply.file.url %> (<%= (reply.file.size / 1000.0).round(2) %> KB, <%= reply.width.to_i %>x<%= reply.height.to_i %>)
+          </div>
+
+          <div class="body">
+            <div class="image">
+              <%= link_to reply.file.url do %>
+                <%= image_tag reply.file.url(:small) %>
+              <% end %>
+            </div>
+
+            <div class="content">
+              <div class="content_heading">
+                <input type="checkbox">
+                <h3 class="subject"><%= reply.subject %></h3> &mdash; <span class="name"><%= reply.name %></span> <%= reply.created_at.strftime("%-d %b %Y %H:%M:%S") %> <span class="no" data-id="<%= reply.id %>">No. <%= reply.id %></span>
+              </div>
+
+              <%= simple_format reply.comment %>
+            </div>
+          </div>
+
+          <div style="clear: both;"></div>
+        </div>
+
+        <br>
+        <br>
+        <!-- reply ends here -->
+      <% end %>
+      <!-- replies end here -->
+    </div>
+  </div>
+
+  <div style="clear: both;"></div>
+</div>
+
+<br>
+<hr>
+<br>
+<% end %>

@@ -1,0 +1,127 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body
+{
+  background-color: #F3DEA9;
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+.notice
+{
+  background-color: #edcc80;
+  padding: 10px;
+  border: 1px solid #895700;
+  display: block;
+  max-width: 320px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+div.title
+{
+  text-align: center;
+  margin: 40px 0;
+  color: #895700;
+
+  p
+  {
+    margin-top: -15px;
+    font-size: 13px;
+  }
+}
+
+div.post
+{
+  div.head
+  {
+    padding-bottom: 7px;
+  }
+
+  div.body
+  {
+    div.image
+    {
+      width: 300px;
+      float: left;
+      text-align: center;
+    }
+
+    div.content
+    {
+      float: left;
+      margin: 0 10px;
+      width: calc(100% - 320px);
+
+      p
+      {
+        margin-top: 0;
+      }
+
+      .content_heading
+      {
+        padding-bottom: 5px;
+
+        .subject, .name, .no
+        {
+          color: #895700;
+        }
+
+        .no:hover
+        {
+          color: #E5A430;
+          cursor: pointer;
+        }
+
+        .name
+        {
+          font-weight: bold;
+        }
+
+        h2, h3
+        {
+          display: inline;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &.reply
+  {
+    background-color: #edcc80;
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #895700;
+
+    div.image
+    {
+      width: 150px !important;
+    }
+  }
+}
+
+table.form
+{
+  margin: 5px auto;
+
+  td.label
+  {
+    background-color: #E5A430;
+    padding: 3px 5px;
+    font-weight: bold;
+  }
+
+  td input[type="text"]
+  {
+    width: 200px;
+  }
+
+  td textarea
+  {
+    width: 250px;
+    height: 100px;
+  }
+}
